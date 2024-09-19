@@ -10,10 +10,11 @@ window.onload = () => {
             alert(`Got first GPS position: lon ${e.detail.position.longitude} lat ${e.detail.position.latitude}`);
             // Add a box to the north of the initial GPS position
             entity.setAttribute("scale", {
-                x: 0.5, 
-                y: 0.5,
-                z: 0.5
+                x: 0.2, 
+                y: 0.2,
+                z: 0.2
             });
+            entity.setAttribute("position", {x: 0, y: 0, z: 0});
             entity.setAttribute('gltf-model', 'my_glb.glb');
             entity.setAttribute('gps-new-entity-place', {
                 latitude: destinationLat,
