@@ -1,4 +1,5 @@
 const distance = 10;
+const fixedScale = 0.1;
 
 // Array of locations with their corresponding latitudes and longitudes
 const locations = [
@@ -19,11 +20,6 @@ window.onload = () => {
             // Create an entity for each location
             locations.forEach((location, index) => {
                 const entity = document.createElement("a-box");
-                entity.setAttribute("scale", {
-                    x: 0.2, 
-                    y: 0.2,
-                    z: 0.2
-                });
                 entity.setAttribute("position", {x: 0, y: 0, z: 0});
                 entity.setAttribute('gltf-model', 'my_glb.glb');
                 entity.setAttribute('gps-new-entity-place', {
@@ -58,6 +54,16 @@ function checkDistance(e, entity, destinationLat, destinationLong) {
     } else {
       entity.setAttribute("visible", false);
     }
+    // Keep the size fixed regardless of the distance
+    updateScale(entity);
+}
+
+function updateScale(entity) {
+  entity.setAttribute("scale", {
+      x: fixedScale, 
+      y: fixedScale,
+      z: fixedScale
+  });
 }
 
 // Function to calculate distance between two coordinates
