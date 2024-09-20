@@ -3,6 +3,8 @@ const fixedScale = 0.09;
 
 // Array of locations with their corresponding latitudes and longitudes
 const locations = [
+
+    { lat: 30.860042, long: 75.838332 },  // Location 1
     { lat: 30.8601763, long: 75.8383157 },  // Location 1
     { lat: 30.86051, long: 75.83832 },  // Location 2
     { lat: 30.859756, long: 75.837953 },  // Location 3
@@ -23,7 +25,7 @@ window.onload = () => {
                 const entity = document.createElement("a-box");
                 entity.setAttribute("position", {x: 0, y: 0, z: 0});
                 entity.setAttribute("scale", {x: fixedScale, y: fixedScale, z: fixedScale});
-                entity.setAttribute('gltf-model', 'my_glb.glb');
+                entity.setAttribute('gltf-model', 'asset.gltf');
                 entity.setAttribute("look-at", "[gps-new-camera]");
                 entity.setAttribute('gps-new-entity-place', {
                     latitude: location.lat,
