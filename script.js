@@ -1,5 +1,5 @@
 const distance = 10;
-const fixedScale = 0.09;
+const fixedScale = 1;
 
 // Array of locations with their corresponding latitudes and longitudes
 const locations = [
