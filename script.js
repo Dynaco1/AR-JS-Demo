@@ -58,7 +58,7 @@ function checkDistance(e, entity, destinationLat, destinationLong) {
       entity.setAttribute("visible", false);
     }
     // Keep the size fixed regardless of the distance
-    updateScale(entity);
+    //updateScale(entity);
 }
 
 function updateScale(entity) {
