@@ -28,6 +28,11 @@ window.onload = () => {
                 entity.setAttribute('animation-mixer', "loop: repeat");
                 entity.setAttribute('gltf-model', 'gift_loot_box_thing_wip.glb');
                 entity.setAttribute("look-at", "[gps-new-camera]");
+                entity.setAttribute('animation-mixer', {
+                    loop: 'repeat',
+                    clip: 'Take 001',  // Plays all animations
+                    crossFadeDuration: 1 
+                });
                 entity.setAttribute('gps-new-entity-place', {
                     latitude: location.lat,
                     longitude: location.long
