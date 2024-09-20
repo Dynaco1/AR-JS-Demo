@@ -1,11 +1,13 @@
-const distance = 5;
+const distance = 7;
 const fixedScale = 0.09;
 
 // Array of locations with their corresponding latitudes and longitudes
 const locations = [
-    { lat: 30.8601763, long: 75.8383157 },  // Location 1
+    // { lat: 30.8601763, long: 75.8383157 },  // Location 1
     { lat: 30.86051, long: 75.83832 },  // Location 2
     { lat: 30.859756, long: 75.837953 },  // Location 3
+    { lat: 30.860024, long: 75.838327 },  // Location 4
+    { lat: 30.859911, long: 75.838322 },  // Location 5
     // Add more locations here
 ];
 
