@@ -6,7 +6,6 @@ const locations = [
     { lat: 30.8601763, long: 75.8383157 },  // Location 1
     { lat: 30.86051, long: 75.83832 },  // Location 2
     { lat: 30.859756, long: 75.837953 },  // Location 3
-    { lat: 30.856915, long: 75.832428 },  // Location 4
     // Add more locations here
 ];
 
@@ -23,8 +22,7 @@ window.onload = () => {
                 const entity = document.createElement("a-box");
                 entity.setAttribute("position", {x: 0, y: 0, z: 0});
                 entity.setAttribute('gltf-model', 'my_glb.glb');
-                entity.setAttribute('rotation', {x: 0, y: 0, z: 0});
-                // entity.setAttribute("look-at", "[gps-new-camera]");
+                entity.setAttribute("look-at", "[gps-new-camera]");
                 entity.setAttribute('gps-new-entity-place', {
                     latitude: location.lat,
                     longitude: location.long
@@ -58,15 +56,25 @@ function checkDistance(e, entity, destinationLat, destinationLong) {
       entity.setAttribute("visible", false);
     }
     // Keep the size fixed regardless of the distance
-    updateScale(entity);
+    // updateScale(entity);
+    updateScale(entity, isInRadius);
 }
 
-function updateScale(entity) {
-  entity.setAttribute("scale", {
-      x: fixedScale, 
-      y: fixedScale,
-      z: fixedScale
-  });
+// function updateScale(entity) {
+//   entity.setAttribute("scale", {
+//       x: fixedScale, 
+//       y: fixedScale,
+//       z: fixedScale
+//   });
+// }
+
+function updateScale(entity, distanceToCamera) {
+    const scaleFactor = fixedScale / (distanceToCamera / 10);  // Adjust scale based on distance
+    entity.setAttribute("scale", {
+        x: scaleFactor, 
+        y: scaleFactor,
+        z: scaleFactor
+    });
 }
 
 // Function to calculate distance between two coordinates
