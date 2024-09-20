@@ -1,4 +1,4 @@
-const distance = 7;
+const distance = 10;
 const fixedScale = 0.09;
 
 // Array of locations with their corresponding latitudes and longitudes
@@ -52,7 +52,7 @@ function checkDistance(e, entity, destinationLat, destinationLong) {
       destinationLat,
       destinationLong
     );
-    if (isInRadius <= distance && isInRadius > 1) {
+    if (isInRadius <= distance && isInRadius > 3) {
       entity.setAttribute("visible", true);
     } else {
       entity.setAttribute("visible", false);
