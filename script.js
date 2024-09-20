@@ -147,7 +147,7 @@ function checkDistanceAndPosition(e, entity, destinationLat, destinationLong) {
     );
 
     // Show the entity only if the user is within 7 meters of the lat/long location
-    if (distanceToLocation <= minDistanceFromLatLong && distanceToLocation > 2) {
+    if (distanceToLocation <= minDistanceFromLatLong && distanceToLocation > 1) {
         entity.setAttribute("visible", true);
         // Position the object at a fixed distance in front of the camera
         updatePositionRelativeToCamera(entity, fixedDistanceFromCamera);
