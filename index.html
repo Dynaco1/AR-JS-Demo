@@ -9,8 +9,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 </head>
 <body>
-    <a-scene vr-mode-ui='enabled: false' arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' renderer='antialias: true; alpha: true logarithmicDepthBuffer: true'>
-        <a-camera gps-new-camera='gpsMinDistance: 3; accelerationToMove: 1.0;'  rotation-reader></a-camera>
+    <a-scene vr-mode-ui='enabled: false' arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' renderer="antialias: true; alpha: true; logarithmicDepthBuffer: true;">
+        <a-camera gps-new-camera='gpsMinDistance: 3; gpsMinAccuracy: 50'></a-camera>
     </a-scene>
     <script src="./script.js"></script>
    </body>
