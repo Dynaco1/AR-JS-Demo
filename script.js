@@ -2,7 +2,7 @@ const distance = 10;
 const fixedScale = 0.1;
 
 // Array of locations with their corresponding latitudes and longitudes
-const locations = [
+let locations = [
 
     { lat: 30.860042, long: 75.838332 },  // Location 1
     { lat: 30.8601763, long: 75.8383157 },  // Location 1
