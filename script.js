@@ -25,7 +25,7 @@ window.onload = () => {
                 const entity = document.createElement("a-box");
                 entity.setAttribute("position", {x: 0, y: 0, z: 0});
                 entity.setAttribute("scale", {x: fixedScale, y: fixedScale, z: fixedScale});
-                entity.setAttribute('gltf-model', 'asset.gltf');
+                entity.setAttribute('gltf-model', 'gift_loot_box_thing_wip.glb');
                 entity.setAttribute("look-at", "[gps-new-camera]");
                 entity.setAttribute('gps-new-entity-place', {
                     latitude: location.lat,
