@@ -1,42 +1,53 @@
 const distance = 10;
-const fixedScale = 0.1;
+const fixedScale = 0.09;
 
 // Array of locations with their corresponding latitudes and longitudes
 let locations = [
 
-    { lat: 30.860042, long: 75.838332 },  // Location 1
-    { lat: 30.8601763, long: 75.8383157 },  // Location 1
-    { lat: 30.86051, long: 75.83832 },  // Location 2
-    { lat: 30.859756, long: 75.837953 },  // Location 3
-    { lat: 30.856915, long: 75.832428 },  // Location 4
+    { lat: 30.856915, long: 75.832428 },  // Location 1
+    { lat: 30.860042, long: 75.838332 },  // Location 2
+    { lat: 30.8601763, long: 75.8383157 },  // Location 3
+    { lat: 30.86051, long: 75.83832 },  // Location 4
+    { lat: 30.859756, long: 75.837953 },  // Location 5
+    { lat: 30.859966713308765, long: 75.83825672470019 },  // Location 6
+    { lat: 30.859731, long: 75.838166 },  // Location 6 
     // Add more locations here
 ];
 
 window.onload = () => {
     let entities = []; // Array to store entities for each location
     const el = document.querySelector("[gps-new-camera]");
-    
-    el.addEventListener("gps-camera-update-position", e => {
-        if(entities.length === 0) {  // Only create entities once
-            alert(`Got first GPS position: lon ${e.detail.position.longitude} lat ${e.detail.position.latitude}`);
+    // event clicker function
+    AFRAME.registerComponent('cursor-listener', {
+        init: function() {
+        var data = this.data;
+        var el = this.el;
+        el.addEventListener('click', function(evt) {
+            alert('click');
+        });
+        }
+    });
 
-            // Create an entity for each location
+    // update camera position
+    el.addEventListener("gps-camera-update-position", e => {
+        if(entities.length === 0) { 
+
+            alert(`Got first GPS position: lon ${e.detail.position.longitude} lat ${e.detail.position.latitude}`);
             locations.forEach((location, index) => {
-                const entity = document.createElement("a-box");
-                entity.setAttribute("position", {x: 0, y: 0, z: 0});
+                const entity = document.createElement("a-entity");
+                entity.setAttribute('gltf-model', '#animated-asset');
+                // to animation if the animation available then use below code:
+                // entity.setAttribute('animation-mixer', {
+                //     loop: 'repeat',
+                //     clip: '*',  // Plays all animations
+                // });
                 entity.setAttribute("scale", {x: fixedScale, y: fixedScale, z: fixedScale});
-                entity.setAttribute('gltf-model', 'gift_loot_box_thing_wip.glb');
                 entity.setAttribute("look-at", "[gps-new-camera]");
-                entity.setAttribute('animation-mixer', {
-                    loop: 'repeat',
-                    clip: 'Take 001',  // Plays all animations
-                    crossFadeDuration: 1
-                });
                 entity.setAttribute('gps-new-entity-place', {
                     latitude: location.lat,
                     longitude: location.long
                 });
-                entity.setAttribute("visible", false);
+                entity.setAttribute("cursor-listener", '');
                 document.querySelector("a-scene").appendChild(entity);
                 entities.push(entity);
             });
@@ -59,21 +70,11 @@ function checkDistance(e, entity, destinationLat, destinationLong) {
       destinationLat,
       destinationLong
     );
-    if (isInRadius <= distance && isInRadius > 3) {
+    if (isInRadius <= distance && isInRadius > 2) {
       entity.setAttribute("visible", true);
     } else {
       entity.setAttribute("visible", false);
     }
-    // Keep the size fixed regardless of the distance
-    //updateScale(entity);
-}
-
-function updateScale(entity) {
-  entity.setAttribute("scale", {
-      x: fixedScale, 
-      y: fixedScale,
-      z: fixedScale
-  });
 }
 
 // Function to calculate distance between two coordinates
