@@ -1,5 +1,5 @@
-const distance = 10;
-const fixedScale = 0.09;
+const distance = 30;
+const fixedScale = 0.02;
 
 // Array of locations with their corresponding latitudes and longitudes
 let locations = [
