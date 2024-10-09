@@ -1,35 +1,44 @@
 const distance = 30;
-const fixedScale = 0.15;
+const fixedScale = 0.5;
 
 // Array of locations with their corresponding latitudes and longitudes
 let locations = [
 
-    { lat: 30.856915, long: 75.832428 },  // Location 1
-    { lat: 30.860042, long: 75.838332 },  // Location 2
-    { lat: 30.8601763, long: 75.8383157 },  // Location 3
-    { lat: 30.86051, long: 75.83832 },  // Location 4
-    { lat: 30.859756, long: 75.837953 },  // Location 5
-    { lat: 30.859966713308765, long: 75.83825672470019 },  // Location 6
-    { lat: 30.859731, long: 75.838166 },  // Location 6 
+    { lat: 30.860040788078813, long: 75.838315842982 },  // Location 1
+    { lat: 30.860279187301085, long: 75.83833163651067 },  // Location 2
+    { lat: 30.859752419312105, long: 75.83829357522256 },  // Location 3
+
     // Add more locations here
 ];
 
 window.onload = () => {
     let entities = []; // Array to store entities for each location
-    const el = document.querySelector("[gps-new-camera]");
+    const el = document.querySelector("[gps-camera]");
     // event clicker function
     AFRAME.registerComponent('cursor-listener', {
         init: function() {
         var data = this.data;
         var el = this.el;
         el.addEventListener('click', function(evt) {
-            alert('click');
+            const isExists = el.getAttribute('animation-mixer').hasOwnProperty('clip');
+            if (isExists && el.getAttribute('animation-mixer')['clip'] !== 'Armature|2_Open Action_Armature') {
+                el.setAttribute('animation-mixer', {
+                        loop: 'repeat',
+                        clip: 'Armature|2_Open Action_Armature',
+                    });
+            } else {
+                el.setAttribute('animation-mixer', {
+                    loop: 'repeat',
+                    clip: 'Armature|1_Shake_Armature',
+                });
+            }
+            // alert('click');
         });
         }
     });
 
     // update camera position
-    el.addEventListener("gps-camera-update-position", e => {
+    window.addEventListener("gps-camera-update-position", e => {
         if(entities.length === 0) { 
 
             alert(`Got first GPS position: lon ${e.detail.position.longitude} lat ${e.detail.position.latitude}`);
@@ -37,13 +46,13 @@ window.onload = () => {
                 const entity = document.createElement("a-entity");
                 entity.setAttribute('gltf-model', '#animated-asset');
                 // to animation if the animation available then use below code:
-                // entity.setAttribute('animation-mixer', {
-                //     loop: 'repeat',
-                //     clip: '*',  // Plays all animations
-                // });
+                entity.setAttribute('animation-mixer', {
+                    loop: 'repeat',
+                    clip: 'Armature|1_Shake_Armature',  // Plays all animations
+                });
                 entity.setAttribute("scale", {x: fixedScale, y: fixedScale, z: fixedScale});
-                entity.setAttribute("look-at", "[gps-new-camera]");
-                entity.setAttribute('gps-new-entity-place', {
+                entity.setAttribute("look-at", "[gps-camera]");
+                entity.setAttribute('gps-entity-place', {
                     latitude: location.lat,
                     longitude: location.long
                 });
@@ -70,7 +79,7 @@ function checkDistance(e, entity, destinationLat, destinationLong) {
       destinationLat,
       destinationLong
     );
-    if (isInRadius <= distance && isInRadius > 2) {
+    if (isInRadius <= distance) {
       entity.setAttribute("visible", true);
     } else {
       entity.setAttribute("visible", false);
