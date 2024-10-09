@@ -79,7 +79,7 @@ function checkDistance(e, entity, destinationLat, destinationLong) {
       destinationLat,
       destinationLong
     );
-    if (isInRadius <= distance) {
+    if (isInRadius <= distance && isInRadius > 1) {
       entity.setAttribute("visible", true);
     } else {
       entity.setAttribute("visible", false);
